@@ -51,6 +51,8 @@ bower.json
 
 # Ignore node_modules
 node_modules/
+.vercel
+.next
 
 # Ignore precompiled javascript packs
 /public/packs
