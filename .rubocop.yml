@@ -1,0 +1,6 @@
+inherit_gem:
+  rubocop-github:
+    - config/default_edge.yml
+    - config/rails_edge.yml
+Style/Documentation:
+  Enabled: false
