@@ -4,21 +4,55 @@ networks:
 volumes:
   db_data:
   gem_cache:
+  node_modules:
 services:
   db:
     image: postgres:14.1-alpine
+    container_name: webql_db
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - development
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    image: webql_server:development
+    tty: true
+    stdin_open: true
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/var/app:cached
       - gem_cache:/usr/local/bundle/gems
+    networks:
+      - development
     ports:
       - 3000:3000
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: db
+      DEV_DATABASE: webql_dev
+      RAILS_ENV: development
     depends_on:
       - db
+      - client
+  client:
+    build:
+      context: ./client
+      dockerfile: ../docker/client.Dockerfile.dev
+    image: webql_client:development
+    networks:
+      - development
+    volumes:
+      - ./client:/var/app:cached
+      - node_modules:/var/app/node_modules
+    ports:
+      - 8080:8080
+    environment:
+      NODE_ENV: development
+      NEXT_TELEMETRY_DISABLED: 1
+    command: npm run dev

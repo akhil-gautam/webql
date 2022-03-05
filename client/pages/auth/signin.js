@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import Router, { useRouter } from 'next/router';
@@ -18,13 +18,6 @@ export default function SignIn() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  useEffect(() => {
-    const token = localStorage.getItem('auth-token');
-    if (token) {
-      setIsLoggined(true);
-    }
-  }, []);
 
   const onSubmit = async (data) => {
     if (loading) return;

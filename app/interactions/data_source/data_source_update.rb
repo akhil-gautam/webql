@@ -9,14 +9,12 @@ class DataSourceUpdate < ActiveInteraction::Base
 
   def execute
     ActiveRecord::Base.transaction do
-      if settings[:password].present?
-        enkrypted = compose(
-          LockerUpdate,
-          locker_id: data_source.settings["password"],
-          enkrypted: settings[:password]
-        )
-        settings[:password] = enkrypted.id
-      end
+      enkrypted = compose(
+        LockerUpdate,
+        locker_id: data_source.settings["password"],
+        enkrypted: settings[:password]
+      )
+      settings[:password] = enkrypted.id
       data_source.update!(settings: settings, source: source)
     end
   end

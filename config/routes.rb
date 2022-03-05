@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     put :restore, on: :member
   end
 
+  get :time, to: "application#time"
   # routes to run the application
   get "runner/:app_id/app_data", to: "runner#app_data"
   get "runner/:component_id/exec_query", to: "runner#exec_query"

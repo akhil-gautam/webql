@@ -9,13 +9,11 @@ class DataSourceCreate < ActiveInteraction::Base
 
   def execute
     ActiveRecord::Base.transaction do
-      if settings[:password].present?
-        enkrypted = compose(
-          LockerCreate,
-          enkrypted: settings[:password]
-        )
-        settings[:password] = enkrypted.id
-      end
+      enkrypted = compose(
+        LockerCreate,
+        enkrypted: settings[:password]
+      )
+      settings[:password] = enkrypted.id
       DataSource.create!(settings: settings, user_id: user_id, source: source)
     end
   end
