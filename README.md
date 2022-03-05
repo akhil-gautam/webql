@@ -1,23 +1,61 @@
-## Getting Started
+[![GitHub issues](https://img.shields.io/github/issues/akhil-gautam/lowcode-ui?style=flat-square)](https://github.com/akhil-gautam/lowcode-ui/issues)
 
-Make sure you have Node 16.x installed and then run the development server:
+<!-- https://img.shields.io/github/forks/akhil-gautam/lowcode-ui?style=flat-square
+
+https://img.shields.io/github/stars/akhil-gautam/lowcode-ui?style=flat-square
+
+https://img.shields.io/github/license/akhil-gautam/lowcode-ui?style=flat-square -->
+
+
+<h1 align="center">
+  WebQL
+</h1>
+
+<h3 align="center">
+  A barebone low-code platform that just works without any hustle.
+</h3>
+
+<p align="center">
+  WebQL has a different take on the low-code solution, you can create muti-page web-apps which would totally resemble a custom codeline 🎊 🎉
+</p>
+
+<br/>
+<br/>
+
+<p align="center">
+  
+![pika-2022-03-02T07_22_54 954Z](https://user-images.githubusercontent.com/28865023/156314722-7697f8ee-8684-4c27-a30f-450d929edc11.png)
+  <br/>
+</p>
+
+## Local development
+
+### Manual setup
+- **Ruby 3.0.2**
+- **Node 16.14.0**
 
 ```bash
-npm run dev
-# or
-yarn dev
+git clone git@github.com:akhil-gautam/webql.git
+
+cd webql
+
+bundle install
+
+# install packages of client and traverse back to root
+cd client && npm install && cd ..
+
+# create & migrate database
+bundle exec rails db:create db:migrate
+
+# start the application
+foreman start -f Procfile.dev
 ```
 
-API app:
-https://github.com/akhil-gautam/lowcode-api
+### Quickstart with docker
+```bash
+git clone git@github.com:akhil-gautam/webql.git
 
-Screens:
-<img width="1440" alt="Screenshot 2022-02-26 at 9 35 55 PM" src="https://user-images.githubusercontent.com/28865023/156117127-b27062c9-e074-4fcf-801f-7d46d3a382e1.png">
+cd webql
 
-<img width="1440" alt="Screenshot 2022-02-26 at 9 36 52 PM" src="https://user-images.githubusercontent.com/28865023/156117155-bf6d109a-f095-4196-9a1a-c17256c240f0.png">
-
-<img width="1440" alt="Screenshot 2022-02-26 at 9 37 28 PM" src="https://user-images.githubusercontent.com/28865023/156117197-38130703-2e10-4eba-8f89-d29ed730c8e4.png">
-
-<img width="1440" alt="Screenshot 2022-02-27 at 12 10 48 PM" src="https://user-images.githubusercontent.com/28865023/156117247-eaf4d15c-0c03-4913-a798-0c7609e8aa74.png">
-
-<img width="471" alt="Screenshot 2022-03-01 at 11 02 50 AM" src="https://user-images.githubusercontent.com/28865023/156117259-21da11c1-5ef4-496f-9ca3-da40693292ee.png">
+docker-compose up
+```

@@ -92,9 +92,9 @@ ActiveRecord::Schema.define(version: 2022_02_27_161903) do
     t.text "queue_name"
     t.integer "priority"
     t.jsonb "serialized_params"
-    t.datetime "scheduled_at"
-    t.datetime "performed_at"
-    t.datetime "finished_at"
+    t.datetime "scheduled_at", precision: 6
+    t.datetime "performed_at", precision: 6
+    t.datetime "finished_at", precision: 6
     t.text "error"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2022_02_27_161903) do
     t.text "concurrency_key"
     t.text "cron_key"
     t.uuid "retried_good_job_id"
-    t.datetime "cron_at"
+    t.datetime "cron_at", precision: 6
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
     t.index ["active_job_id"], name: "index_good_jobs_on_active_job_id"
     t.index ["concurrency_key"], name: "index_good_jobs_on_concurrency_key_when_unfinished", where: "(finished_at IS NULL)"
